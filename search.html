@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="Post 6 Headline, Post 5 Headline, Post 4 Headline">
+  <meta name="description" content="">
+  <title>search</title>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="search.css" media="screen">
+  <script class="u-script" type="text/javascript" src="jquery.js" "="" defer=""></script>
+    <script class=" u-script" type="text/javascript" src="nicepage.js" "="" defer=""></script>
+    <meta name=" generator" content="Nicepage 4.17.10, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/3145755.png"
+}</script>
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="search">
+  <meta property="og:type" content="website">
+</head>
+
+<body class="u-body u-xl-mode" data-lang="en">
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <header class="u-clearfix u-header u-header" id="sec-3759">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="128" data-image-height="128">
+        <img src="images/3145755.png" class="u-logo-image u-logo-image-1">
+      </a>
+      <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+        <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+          <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+            href="#">
+            <svg class="u-svg-link" viewBox="0 0 24 24">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
+            </svg>
+            <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px"
+              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <rect y="1" width="16" height="2"></rect>
+                <rect y="7" width="16" height="2"></rect>
+                <rect y="13" width="16" height="2"></rect>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="bookshelf.html" style="padding: 10px 20px;">책장</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="search.html" style="padding: 10px 20px;">검색</a>
+            </li>
+          </ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="bookshelf.html">책장</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="search.html">검색</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <section class="u-align-center u-clearfix u-section-1" id="carousel_45e4">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-align-center u-clearfix u-expanded-width u-group-elements u-group-elements-1">
+        <div class="u-align-center u-clearfix u-custom-html u-expanded-width u-custom-html-1">
+
+          <input id="bookName" value="" type="text">
+        </div>
+        <button id="search"
+          class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-body-color u-btn-1">검색</button>
+      </div>
+
+      <script>
+        $(document).ready(function () {
+          $("#blog").hide();
+            $("#search").click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookName").val() },
+                    headers: { Authorization: "KakaoAK e344ea5075c3bd579135b1be0dd65a2b" }
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        document.getElementById("bookImg1").src=msg.documents[0].thumbnail;
+                        document.getElementById("bookImg2").src=msg.documents[1].thumbnail;
+                        document.getElementById("bookImg3").src=msg.documents[2].thumbnail;
+                        $("#title1").text(msg.documents[0].title);
+                        $("#title2").text(msg.documents[1].title);
+                        $("#title3").text(msg.documents[2].title);
+                        $("#authors1").text(msg.documents[0].authors);
+                        $("#authors2").text(msg.documents[1].authors);
+                        $("#authors3").text(msg.documents[2].authors);
+                        $("#publisher1").text(msg.documents[0].publisher);
+                        $("#publisher2").text(msg.documents[1].publisher);
+                        $("#publisher3").text(msg.documents[2].publisher);
+                        $("#blog").show();
+                    });
+            });
+        });</script>
+
+      
+    </script> 
+      <!--blog-->
+      <!--blog_options_json-->
+      <!--{"type":"Recent","source":"","tags":"","count":""}-->
+      <!--/blog_options_json-->
+
+      <div class="u-blog u-blog-1">
+        <div id="blog" class="u-repeater u-repeater-1">
+          <!--blog_post-->
+
+          <div class="u-blog-post u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              <a class="u-post-header-link">
+                <!--blog_post_image-->
+                <img id="bookImg1" src="images/3145755.png" alt="" class="u-blog-control u-image u-image-default u-image-1">
+                <!--/blog_post_image-->
+              </a>
+              <!--blog_post_header-->
+              <h2 class="u-blog-control u-text u-text-1">
+                <a id="title1" class="u-post-header-link">
+                  <!--blog_post_header_content-->Post 6 Headline
+                  <!--/blog_post_header_content-->
+                </a>
+              </h2>
+              <!--/blog_post_header-->
+              <!--blog_post_content-->
+              <div id="authors1" class="u-blog-control u-post-content u-text u-text-2">
+                <!--blog_post_content_content-->Sample small text. Lorem ipsum dolor sit amet.
+                <!--/blog_post_content_content-->
+              </div>
+              <!--/blog_post_content-->
+              <!--blog_post_metadata-->
+              <div class="u-blog-control u-metadata u-metadata-1">
+                <!--blog_post_metadata_date-->
+                <span id="publisher1" class="u-meta-date u-meta-icon">
+                  <!--blog_post_metadata_date_content-->Wed Aug 31 2022
+                  <!--/blog_post_metadata_date_content-->
+                </span>
+                <!--/blog_post_metadata_date-->
+              </div>
+              <!--/blog_post_metadata-->
+              <a
+                class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-2">+<span
+                  style="font-size: 1.25rem;"></span>
+              </a>
+            </div>
+          </div>
+          <!--/blog_post-->
+          <!--blog_post-->
+
+          <div class="u-blog-post u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <a class="u-post-header-link">
+                <!--blog_post_image-->
+                <img id="bookImg2" src="images/3145755.png" alt="" class="u-blog-control u-image u-image-default u-image-2">
+                <!--/blog_post_image-->
+              </a>
+              <!--blog_post_header-->
+              <h2 class="u-blog-control u-text u-text-3">
+                <a id="title2" class="u-post-header-link">
+                  <!--blog_post_header_content-->Post 5 Headline
+                  <!--/blog_post_header_content-->
+                </a>
+              </h2>
+              <!--/blog_post_header-->
+              <!--blog_post_content-->
+              <div id="authors2" class="u-blog-control u-post-content u-text u-text-4">
+                <!--blog_post_content_content-->Sample small text. Lorem ipsum dolor sit amet.
+                <!--/blog_post_content_content-->
+              </div>
+              <!--/blog_post_content-->
+              <!--blog_post_metadata-->
+              <div class="u-blog-control u-metadata u-metadata-2">
+                <!--blog_post_metadata_date-->
+                <span id="publisher2" class="u-meta-date u-meta-icon">
+                  <!--blog_post_metadata_date_content-->Wed Aug 31 2022
+                  <!--/blog_post_metadata_date_content-->
+                </span>
+                <!--/blog_post_metadata_date-->
+              </div>
+              <!--/blog_post_metadata-->
+              <a
+                class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-3">+<span
+                  style="font-size: 1.25rem;"></span>
+              </a>
+            </div>
+
+          </div>
+          <!--/blog_post-->
+          <!--blog_post-->
+          <div class="u-blog-post u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-3">
+              <a class="u-post-header-link">
+                <!--blog_post_image-->
+                <img id="bookImg3" src="images/3145755.png" alt="" class="u-blog-control u-image u-image-default u-image-3">
+                <!--/blog_post_image-->
+              </a>
+              <!--blog_post_header-->
+              <h2 class="u-blog-control u-text u-text-5">
+                <a id="title3" class="u-post-header-link">
+                  <!--blog_post_header_content-->Post 4 Headline
+                  <!--/blog_post_header_content-->
+                </a>
+              </h2>
+              <!--/blog_post_header-->
+              <!--blog_post_content-->
+              <div id="authors3" class="u-blog-control u-post-content u-text u-text-6">
+                <!--blog_post_content_content-->Sample small text. Lorem ipsum dolor sit amet.
+                <!--/blog_post_content_content-->
+              </div>
+              <!--/blog_post_content-->
+              <!--blog_post_metadata-->
+              <div class="u-blog-control u-metadata u-metadata-3">
+                <!--blog_post_metadata_date-->
+                <span id="publisher3" class="u-meta-date u-meta-icon">
+                  <!--blog_post_metadata_date_content-->Wed Aug 31 2022
+                  <!--/blog_post_metadata_date_content-->
+                </span>
+                <!--/blog_post_metadata_date-->
+              </div>
+              <!--/blog_post_metadata-->
+              <a
+                class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-4">+<span
+                  style="font-size: 1.25rem;"></span>
+              </a>
+            </div>
+
+          </div>
+          <!--/blog_post-->
+        </div>
+      </div>
+      <!--/blog-->
+    </div>
+  </section>
+
+
+  <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-4852">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-small-text u-text u-text-variant u-text-1">made by yeunjeong</p>
+    </div>
+  </footer>
+  <section class="u-backlink u-clearfix u-grey-80">
+    <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+      <span>Website Templates</span>
+    </a>
+    <p class="u-text">
+      <span>created with</span>
+    </p>
+    <a class="u-link" href="" target="_blank">
+      <span>Website Builder Software</span>
+    </a>.
+  </section>
+
+</body>
+
+</html>
